@@ -8,10 +8,10 @@ VALUES
 
 INSERT INTO roles(title, department_id, salary)
 VALUES
-('Assistant Manager', 1, 100000),
-('Assistant Manager', 2, 100000),
+('GM Assistant Manager', 1, 100000),
 ('GM Lead', 1, 50000),
 ('GM Stocker', 1, 40000),
+('CS Assistant Manager', 2, 100000),
 ('CS Lead', 2, 50000),
 ('Cashier', 2, 25000),
 ('Cleaning', 2, 35000),

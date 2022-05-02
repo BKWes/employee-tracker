@@ -39,7 +39,7 @@ router.post('/department', ({ body }, res) => {
                 VALUES (?)`;
     db.query(sql, [body.name], (err, result) => {
         if (err) {
-            res.status(400)({ error: err.message });
+            res.status(400).json({ error: err.message });
             return;
         }
         res.json({
