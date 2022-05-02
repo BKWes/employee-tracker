@@ -1,4 +1,4 @@
-INSERT INTO department(name)
+INSERT INTO departments(name)
 VALUES
 ('General Merchandise'),
 ('Customer Service'),
