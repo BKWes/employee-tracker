@@ -16,17 +16,14 @@ CREATE TABLE roles (
     ON DELETE SET NULL
 );
 
--- CREATE TABLE employees (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     first_name VARCHAR(30),
---     last_name VARCHAR(30),
---     department_name VARCHAR(30), 
---     salary DECIMAL,   
---     role_id INTEGER,
---     FOREIGN KEY (role_id) REFERENCES roles(id)
---     ON DELETE SET NULL,
---     FOREIGN KEY (department_name) REFERENCES departments(name)
---     ON DELETE SET NULL,
---     FOREIGN KEY (salary) REFERENCES roles(salary)
---     ON DELETE SET NULL
--- );
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(30),
+    last_name VARCHAR(30),
+    department_id INTEGER,
+    role_id INTEGER,
+    FOREIGN KEY (department_id) REFERENCES departments(id)
+    ON DELETE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES roles(id)
+    ON DELETE CASCADE
+);
