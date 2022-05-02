@@ -7,17 +7,17 @@ CREATE TABLE departments (
     name VARCHAR(30)
 );
 
--- CREATE TABLE roles (
---     id INT PRIMARY KEY,
---     title VARCHAR(30),
---     department_name VARCHAR(30),
---     salary DECIMAL,
---     FOREIGN KEY (department_name) REFERENCES departments(name)
---     ON DELETE SET NULL
--- );
+CREATE TABLE roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(30),
+    department_id INTEGER,
+    salary DECIMAL,
+    FOREIGN KEY (department_id) REFERENCES departments(id)
+    ON DELETE SET NULL
+);
 
 -- CREATE TABLE employees (
---     id INT PRIMARY KEY,
+--     id INT AUTO_INCREMENT PRIMARY KEY,
 --     first_name VARCHAR(30),
 --     last_name VARCHAR(30),
 --     department_name VARCHAR(30), 
