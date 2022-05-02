@@ -4,7 +4,8 @@ const db = require('../db/connection');
 
 // GET all employees
 router.get('/employees', (req, res) => {
-    const sql = `SELECT * FROM employees`;
+    const sql = `SELECT employees.*, roles.title AS role_title, roles.department_id AS department_id, roles.salary AS salary FROM employees
+                LEFT JOIN roles ON employees.role_id = roles.id`;
     db.query(sql, (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });

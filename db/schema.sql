@@ -20,10 +20,7 @@ CREATE TABLE employees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
-    department_id INTEGER,
     role_id INTEGER,
-    FOREIGN KEY (department_id) REFERENCES departments(id)
-    ON DELETE CASCADE,
     FOREIGN KEY (role_id) REFERENCES roles(id)
     ON DELETE CASCADE
 );
