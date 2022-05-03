@@ -90,7 +90,10 @@ const addDepartmentPrompt = () => {
                 return console.error(err.message);
             }
         })
-        initPrompt();
+        db.query(departmentStr, (err, rows) => {
+            console.table(rows);
+            initPrompt();
+        })
     })
 };
 
@@ -144,7 +147,10 @@ const addRolePrompt = () => {
                 return console.error(err.message);
             }
         })
-        initPrompt();
+        db.query(rolesStr, (err, rows) => {
+            console.table(rows);
+            initPrompt();
+        })
     })
 };
 
@@ -198,7 +204,10 @@ const addEmployeePrompt = () => {
                 return console.error(err.message);
             }
         })
-        initPrompt();
+        db.query(employeeStr, (err, rows) => {
+            console.table(rows);
+            initPrompt();
+        })
     })
 };
 
