@@ -1,7 +1,7 @@
 # employee-tracker
 
 ## Description
-I have to build a node.js application to keep track of employees in a database to improve organization.
+I was tasked to build a node.js application to keep track of employees in a database to improve organization.
 
 GIVEN a command-line application that accepts user input  
 WHEN I start the application  

@@ -251,9 +251,10 @@ const updatePrompt = () => {
         })
         initPrompt();
     })
-}
+};
 
 initPrompt();
+
 
 // // default response for any other request (NOT FOUND)
 // app.use((req,res) => {
@@ -267,3 +268,5 @@ initPrompt();
 //         console.log(`Server running on port ${PORT}`);
 //     });
 // });
+
+// CODE FOR API SERVER ^^
