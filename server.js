@@ -15,12 +15,16 @@ require('dotenv').config();
 
 const departmentStr = `SELECT * FROM departments;`;
 
-const rolesStr = `SELECT roles.*, departments.name AS department
+const rolesStr = `SELECT roles.id, roles.title, roles.salary, departments.name AS department
                 FROM roles
                 LEFT JOIN departments ON roles.department_id = departments.id;`;
 
 // CREATE EMPLOYEE SQL FOR VIEW ALL CHOICE  
-const employeeStr = `SELECT employees.*;`;
+const employeeStr = `
+SELECT employees.*, roles.title AS role_title, roles.salary AS salary, departments.name AS department
+FROM employees
+LEFT JOIN roles ON employees.role_id = roles.id
+LEFT JOIN departments ON roles.department_id = departments.id;`;
 
 // inquirer options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
 const initPrompt = () => {
@@ -120,7 +124,7 @@ const addRolePrompt = () => {
         },
         {
             type: 'number',
-            name: 'roleDepartment',
+            name: 'department',
             message: 'What is the department ID that this role belong to?',
             validate: nameInput => {
                 if (nameInput) {
@@ -134,7 +138,7 @@ const addRolePrompt = () => {
     ])
     .then(roleResults => {
         const addRoleStr = `INSERT INTO roles (name, salary, department_id)
-                            VALUES ('${roleResults.roleName}', '${roleResults.salary}', '${roleResults.roleDepartment}');`
+                            VALUES ('${roleResults.roleName}', '${roleResults.salary}', '${roleResults.department}');`
         db.query(addRoleStr, (err, results) => {
             if (err) {
                 return console.error(err.message);
