@@ -5,13 +5,22 @@ const inquirer = require('inquirer');
 const apiRoutes = require('./routes');
 require('dotenv').config();
 
-const PORT = process.env.PORT || 3001;
-const app = express();
+// const PORT = process.env.PORT || 3001;
+// const app = express();
 
-app.use(express.urlencoded({ extended: false} ));
-app.use(express.json());
+// app.use(express.urlencoded({ extended: false} ));
+// app.use(express.json());
 
-app.use('/api', apiRoutes);
+// app.use('/api', apiRoutes);
+
+const departmentStr = `SELECT * FROM departments;`;
+
+const rolesStr = `SELECT roles.*, departments.name AS department
+                FROM roles
+                LEFT JOIN departments ON roles.department_id = departments.id;`;
+
+// CREATE EMPLOYEE SQL FOR VIEW ALL CHOICE  
+const employeeStr = `SELECT employees.*;`;
 
 // inquirer options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
 const initPrompt = () => {
@@ -20,9 +29,37 @@ const initPrompt = () => {
         type: 'list',
         name: 'start',
         message: 'What would you like to do?',
-        choices: ['view all departments', 'view all roles', 'view all employees', 'add a department', 'add a role', 'add an employee', 'update employee role']
+        choices: ['view all departments', 'view all roles', 'view all employees', 'add a department', 'add a role', 'add an employee', 'update employee role', 'exit']
     }
 ])
+.then(results => {
+    if(results.start === 'view all departments') {
+        db.query(departmentStr, (err, rows) => {
+            console.table(rows);
+            initPrompt();
+        })
+    } else if (results.start === 'view all roles') {
+        db.query(rolesStr, (err, rows) => {
+            console.table(rows);
+            initPrompt();
+        })
+    } else if (results.start === 'view all employees') {
+        db.query(employeeStr, (err, rows) => {
+            console.table(rows);
+            initPrompt();
+        })
+    } else if (results.start === 'add a department') {
+        addDepartmentPrompt();
+    } else if (results.start === 'add a role') {
+        addRolePrompt();
+    } else if (results.start === 'add an employee') {
+        addEmployeePrompt();
+    } else if (results.start === 'update an employee role') {
+        updatePrompt();
+    } else if (results.start === 'exit') {
+        db.end();
+    }
+})
 };
 
 const addDepartmentPrompt = () => {
